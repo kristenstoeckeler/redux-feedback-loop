@@ -25,20 +25,13 @@ const styles = theme => ({
 class Review extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
-        // axios.post('/api/order', this.state).then(response => {
-        //     console.log('submitted', response);
-        // })
-        // this.props.dispatch({
-        //     type: 'ADD_CUSTOMER',
-        //     payload: this.state
-        // });
-        // this.setState({
-        //     customer_name: '',
-        //     street_address: '',
-        //     city: '',
-        //     zip: '',
-        //     type: 'Pickup',
-        // });
+        
+        axios.post('/api/feedback', this.props.feedback)
+        .then(response => {
+            console.log('submitted', response);
+        }).catch(error =>{
+            console.log( 'Error on POST', error);
+        })
         this.props.history.push('/thank-you');
 
     }
