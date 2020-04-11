@@ -30,7 +30,7 @@ class Support extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <div className="dropdown">
                         <select type="select" onChange={event => this.handleChangeFor(event, 'support')}>
-                            <option value="0">Comprehension</option>
+                            <option value="0">Support</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>

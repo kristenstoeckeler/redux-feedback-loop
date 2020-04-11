@@ -27,12 +27,12 @@ class Comments extends Component {
             <>
                 <h5>Are there any comments you'd like to leave?</h5>
                 <form onSubmit={this.handleSubmit}>
-                    <div className="dropdown">
-                        <input type="text" onChange={event => this.handleChangeFor(event, 'comments')}>
-                            </input>
-                    </div>
+                    <label>Comments
+                    <textarea onChange={event => this.handleChangeFor(event, 'comments')}/>
+                    </label>
                     <button type="submit">Next</button>
                 </form>
+
                 {JSON.stringify(this.props.feedback)}
             </>
         );
