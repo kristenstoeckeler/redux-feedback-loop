@@ -14,7 +14,7 @@ const feedbackReducer = (state = [], action) => {
     return state
 }
 
-const formReducer = (state = {}, action) => {
+const formReducer = (state = [], action) => {
     if (action.type === 'FORM') {
         return action.payload;
     }
@@ -25,8 +25,8 @@ const storeInstance = createStore(
     combineReducers({
         feedbackReducer,
         formReducer
-
     }),
+
     applyMiddleware(logger)
 );
 
