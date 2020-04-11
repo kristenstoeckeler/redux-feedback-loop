@@ -27,6 +27,7 @@ class Review extends Component {
         return (
             <>
                 <h5>Please review your feedback.</h5>
+                {JSON.stringify(this.props.feedback)}
                 <form onSubmit={this.handleSubmit}>
                     <button type="submit">Next</button>
                 </form>

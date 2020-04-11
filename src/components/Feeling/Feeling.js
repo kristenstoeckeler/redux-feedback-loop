@@ -4,40 +4,56 @@ import { connect } from 'react-redux';
 
 class Feeling extends Component {
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        // axios.post('/api/order', this.state).then(response => {
-        //     console.log('submitted', response);
-        // })
-        // this.props.dispatch({
-        //     type: 'ADD_CUSTOMER',
-        //     payload: this.state
-        // });
-        // this.setState({
-        //     customer_name: '',
-        //     street_address: '',
-        //     city: '',
-        //     zip: '',
-        //     type: 'Pickup',
-        // });
-        this.props.history.push('/understanding');
+    state = {
+        feeling: 0,
+        understanding: 0,
+        support: 0,
+        comments:'',
+    }
 
+    handleSubmit = (event) => {
+        console.log( 'In handleSubmit');
+        event.preventDefault();
+        this.props.dispatch({
+            type: 'FEEDBACK',
+            payload: this.state
+        });
+        this.props.history.push('/Understanding');
+    }
+
+    handleChangeFor = (event, propertyName) => {
+        console.log( 'in handleChangeFor', event.target.value );
+        this.setState({
+            [propertyName]: event.target.value
+        })
     }
 
     render() {
         return (
             <>
-            <h5>How are you feeling?</h5>
-            <form onSubmit={this.handleSubmit}>
-            <button type="submit">Next</button>
-            </form>
+            <h5>How are you feeling today?</h5>
+            <p>With 1 being the worst day ever and 5 being the day you win the lottery, how are you feeling today?</p>
+                <form onSubmit={this.handleSubmit}>
+                    <div className="dropdown">
+                        <select type="select" onChange = {event => this.handleChangeFor(event, 'feeling')}>
+                            <option value="0">Feelings</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <button type="submit">Next</button>
+                </form>
+            {JSON.stringify(this.state)}
             </>
         );
     }
 }
 
 const putReduxStateOnProps = (reduxStore) => ({
-    feedback: reduxStore.feedbackReducer,
+    form: reduxStore.formReducer,
 })
 
 export default withStyles()(connect(putReduxStateOnProps)(Feeling));

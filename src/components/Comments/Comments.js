@@ -5,23 +5,21 @@ import { withStyles } from '@material-ui/core/styles';
 
 class Comments extends Component {
     handleSubmit = (event) => {
+        console.log('In handleSubmit');
         event.preventDefault();
-        // axios.post('/api/order', this.state).then(response => {
-        //     console.log('submitted', response);
-        // })
-        // this.props.dispatch({
-        //     type: 'ADD_CUSTOMER',
-        //     payload: this.state
-        // });
-        // this.setState({
-        //     customer_name: '',
-        //     street_address: '',
-        //     city: '',
-        //     zip: '',
-        //     type: 'Pickup',
-        // });
+        this.props.dispatch({
+            type: 'FEEDBACK',
+            payload: this.state
+        });
         this.props.history.push('/review');
+    }
 
+    handleChangeFor = (event, propertyName) => {
+        console.log('in handleChangeFor', event.target.value);
+        this.setState({
+            ...this.props.feedback,
+            [propertyName]: event.target.value
+        })
     }
 
     render() {
@@ -29,8 +27,13 @@ class Comments extends Component {
             <>
                 <h5>Are there any comments you'd like to leave?</h5>
                 <form onSubmit={this.handleSubmit}>
+                    <div className="dropdown">
+                        <input type="text" onChange={event => this.handleChangeFor(event, 'comments')}>
+                            </input>
+                    </div>
                     <button type="submit">Next</button>
                 </form>
+                {JSON.stringify(this.props.feedback)}
             </>
         );
     }
