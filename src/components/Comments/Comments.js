@@ -1,3 +1,4 @@
+//comments on Feeling.js and Understanding.js apply to everything in this component as well, except see below*
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
@@ -11,7 +12,7 @@ const styles = theme => ({
 
 
 class Comments extends Component {
-
+//I'm not sure if I need to delineate state for every property, or just the one I care about in this component
     state = {
         feeling: 0,
         understanding: 0,
@@ -19,6 +20,8 @@ class Comments extends Component {
         comments: '',
     }
 
+    //*I removed the if statement so that the dispatch would happen even with no input, but
+    //that required me to keep state above so that the value was an empty string by default
     handleSubmit = (event) => {
         console.log('In handleSubmit');
         event.preventDefault();
@@ -48,8 +51,7 @@ class Comments extends Component {
                     </label>
                     <Button type="submit" variant="contained" color="secondary" className={classes.button}>Next</Button>
                 </form>
-
-                {JSON.stringify(this.props.feedback)}
+                {/* {JSON.stringify(this.props.feedback)} */}
             </>
         );
     }

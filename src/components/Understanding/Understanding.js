@@ -31,7 +31,7 @@ class Understanding extends Component {
             });
             this.props.history.push('/support');
         } else {
-            alert('Please enter a response to continue');
+            alert('Please enter a response to continue.');
         }
     }
 
@@ -43,8 +43,6 @@ class Understanding extends Component {
             [propertyName]: event.target.value
         })
     }
-
-
 
     render() {
         const classes = this.props.classes
@@ -66,12 +64,13 @@ class Understanding extends Component {
                     </div>
                     <Button type="submit" variant="contained" color="secondary" className={classes.button}>Next</Button>
                 </form>
-                {JSON.stringify(this.props.feedback)}
+                {/* {JSON.stringify(this.props.feedback)} */}
             </>
         );
     }
 }
-
+//I just brought this in so that I could see this.props.feedback through JSON.stringify as I working 
+//to make sure values were ending up in my reducer
 const putReduxStateOnProps = (reduxStore) => ({
     feedback: reduxStore.feedbackReducer,
 })

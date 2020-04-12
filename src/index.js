@@ -16,7 +16,7 @@ const feedbackReducer = (state = [], action) => {
     return state
 }
 
-//oh jesus now I can't remember what the form reducer is doing. 
+//this reducer is housing the data from all the feedback forms submitted to render in the admin component
 const formReducer = (state = [], action) => {
     if (action.type === 'FORM') {
         return action.payload;

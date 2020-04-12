@@ -25,11 +25,12 @@ const styles = theme => ({
 })
 
 class Admin extends Component {
-
+    //rendering initial GET
     componentDidMount() {
         this.getFeedback()
     }
 
+    //sending axios request to server feedback router for data from server
     getFeedback = () => {
         axios.get('/api/feedback')
             .then(response => {
@@ -39,7 +40,7 @@ class Admin extends Component {
                 console.log('Error getting feedback', error);
             })
     }
-
+//axios delete request
     handleDelete = (id) => {
         console.log('Deleting feedback');
         console.log('Heres the id', id);
@@ -57,8 +58,6 @@ class Admin extends Component {
         return (
             <>
             <div>
-            {/* {JSON.stringify(this.props.feedback)} */}
-
             <TableContainer>
                 <Table >
                     <TableHead>

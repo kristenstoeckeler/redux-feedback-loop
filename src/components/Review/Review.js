@@ -1,8 +1,9 @@
+//comments on Feeling.js and Understanding.js apply to everything in this component as well
 import React, { Component } from 'react';
 import axios from 'axios';
 
 import { withStyles } from '@material-ui/core/styles';
-
+//extra Material UI imports for Table
 import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -74,7 +75,7 @@ class Review extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <Button type="submit" variant="contained" color="secondary" className={classes.button}>Submit</Button>
                 </form>
-                {JSON.stringify(this.props.feedback)}
+                {/* {JSON.stringify(this.props.feedback)} */}
             </>
         );
     }

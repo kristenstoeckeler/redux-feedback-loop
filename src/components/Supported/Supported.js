@@ -1,3 +1,5 @@
+//comments on Feeling.js and Understanding.js apply to everything in this component as well
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
@@ -61,7 +63,7 @@ class Support extends Component {
                     </div>
                     <Button type="submit" variant="contained" color="secondary" className={classes.button}>Next</Button>
                 </form>
-                {JSON.stringify(this.props.feedback)}
+                {/* {JSON.stringify(this.props.feedback)} */}
             </>
         );
     }
