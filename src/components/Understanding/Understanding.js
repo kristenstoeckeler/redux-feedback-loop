@@ -4,19 +4,33 @@ import { withStyles } from '@material-ui/core/styles';
 
 
 class Understanding extends Component {
+
+    state = {
+        feeling: 0,
+        understanding: 0,
+        support: 0,
+        comments: '',
+    }
    
     handleSubmit = (event) => {
-        console.log('In handleSubmit');
+        console.log('In handleSubmit', this.state);
         event.preventDefault();
-        this.props.dispatch({
-            type: 'FEEDBACK',
-            payload: this.state
-        });
-        this.props.history.push('/support');
+
+        if (this.state.understanding > 0) {
+            this.props.dispatch({
+                type: 'FEEDBACK',
+                payload: this.state
+            });
+            this.props.history.push('/support');
+        } else {
+            alert('Please enter a response to continue');
+        }
     }
 
     handleChangeFor = (event, propertyName) => {
         console.log('in handleChangeFor', event.target.value);
+        //put if/else in here with .alert?
+
         this.setState({
             ...this.props.feedback,
             [propertyName]: event.target.value
@@ -44,6 +58,7 @@ class Understanding extends Component {
                     <button type="submit">Next</button>
                 </form>
                 {JSON.stringify(this.props.feedback)}
+                <p>Here's state rn:</p> {JSON.stringify(this.state)}
             </>
         );
     }

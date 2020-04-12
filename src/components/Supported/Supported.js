@@ -4,18 +4,31 @@ import { withStyles } from '@material-ui/core/styles';
 
 
 class Support extends Component {
+    state = {
+        feeling: 0,
+        understanding: 0,
+        support: 0,
+        comments: '',
+    }
+
     handleSubmit = (event) => {
-        console.log('In handleSubmit');
+        console.log('In handleSubmit', this.state);
         event.preventDefault();
-        this.props.dispatch({
-            type: 'FEEDBACK',
-            payload: this.state
-        });
-        this.props.history.push('/comments');
+
+        if (this.state.support > 0) {
+            this.props.dispatch({
+                type: 'FEEDBACK',
+                payload: this.state
+            });
+            this.props.history.push('/comments');
+        } else {
+            alert('Please enter a response to continue');
+        }
     }
 
     handleChangeFor = (event, propertyName) => {
         console.log('in handleChangeFor', event.target.value);
+
         this.setState({
             ...this.props.feedback,
             [propertyName]: event.target.value

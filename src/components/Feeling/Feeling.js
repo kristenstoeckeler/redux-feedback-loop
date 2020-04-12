@@ -14,11 +14,16 @@ class Feeling extends Component {
     handleSubmit = (event) => {
         console.log( 'In handleSubmit');
         event.preventDefault();
-        this.props.dispatch({
-            type: 'FEEDBACK',
-            payload: this.state
-        });
-        this.props.history.push('/Understanding');
+
+        if(this.state.feeling > 0){
+            this.props.dispatch({
+                type: 'FEEDBACK',
+                payload: this.state
+            });
+            this.props.history.push('/understanding');
+        }else{
+            alert('Please enter a response to continue');
+        }
     }
 
     handleChangeFor = (event, propertyName) => {
