@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 
-class Feeling extends Component {
+//this is for Material U-I buttons
+const styles = theme => ({
+    button: {
+        margin: theme.spacing.unit,
+    },
+});
 
+
+class Feeling extends Component {
+//I employed state here b/c for some reason it allowed me to access this.state.feeling below in my if statement to throw an alert
+//if there wasn't a value selected. I don't totally get why this works rn, but it did the trick. Same for all successive components. 
     state = {
         feeling: 0,
         understanding: 0,
@@ -11,6 +21,8 @@ class Feeling extends Component {
         comments:'',
     }
 
+//this function is sending state to the feedback reducer at index.js if a value has been registered in the select menu on the DOM
+//it also advances to the next page if a value was logged. Otherwise it throws an alert asking for a selection to be made.
     handleSubmit = (event) => {
         console.log( 'In handleSubmit');
         event.preventDefault();
@@ -22,10 +34,11 @@ class Feeling extends Component {
             });
             this.props.history.push('/understanding');
         }else{
-            alert('Please enter a response to continue');
+            alert('Please enter a response to continue.');
         }
     }
 
+//This function sets state with values from select menu on DOM
     handleChangeFor = (event, propertyName) => {
         console.log( 'in handleChangeFor', event.target.value );
         this.setState({
@@ -34,10 +47,13 @@ class Feeling extends Component {
     }
 
     render() {
+        //this is for Material U-I buttons
+        const classes = this.props.classes 
+
         return (
             <>
-            <h5>How are you feeling today?</h5>
-            <p>With 1 being the worst day ever and 5 being the day you win the lottery, how are you feeling today?</p>
+            <h3>How are you feeling today?</h3>
+            <p>With '1' being the worst day ever and '5' being the day you win the lottery, how are you feeling today?</p>
                 <form onSubmit={this.handleSubmit}>
                     <div className="dropdown">
                         <select type="select" onChange = {event => this.handleChangeFor(event, 'feeling')}>
@@ -49,16 +65,12 @@ class Feeling extends Component {
                             <option value="5">5</option>
                         </select>
                     </div>
-                    <button type="submit">Next</button>
+                    <Button type="submit" variant="contained" color="secondary" className={classes.button}>Next</Button>
                 </form>
-            {JSON.stringify(this.state)}
+            {/* {JSON.stringify(this.state)} */}
             </>
         );
     }
 }
 
-const putReduxStateOnProps = (reduxStore) => ({
-    form: reduxStore.formReducer,
-})
-
-export default withStyles()(connect(putReduxStateOnProps)(Feeling));
+export default withStyles(styles)(connect()(Feeling));

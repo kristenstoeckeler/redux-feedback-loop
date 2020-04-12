@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
+const styles = theme => ({
+    button: {
+        margin: theme.spacing.unit,
+    },
+});
 
 class Support extends Component {
     state = {
@@ -36,10 +42,12 @@ class Support extends Component {
     }
 
     render() {
+        const classes = this.props.classes
         return (
             <>
-                <h5>How well are you feeling supported?</h5>
-                <p>With 1 being 'nobody around here cares about me' and 5 being 'I am clearly god', how well are you feeling supported?</p>
+                <h3>How well are you feeling supported?</h3>
+                <p>With '1' being "Nobody around here cares about me at all" and '5' being "I am clearly god because every need
+                    I have is being attended to every moment of every day", how well are you feeling supported?</p>
                 <form onSubmit={this.handleSubmit}>
                     <div className="dropdown">
                         <select type="select" onChange={event => this.handleChangeFor(event, 'support')}>
@@ -51,7 +59,7 @@ class Support extends Component {
                             <option value="5">5</option>
                         </select>
                     </div>
-                    <button type="submit">Next</button>
+                    <Button type="submit" variant="contained" color="secondary" className={classes.button}>Next</Button>
                 </form>
                 {JSON.stringify(this.props.feedback)}
             </>
@@ -63,4 +71,4 @@ const putReduxStateOnProps = (reduxStore) => ({
     feedback: reduxStore.feedbackReducer,
 })
 
-export default withStyles()(connect(putReduxStateOnProps)(Support));
+export default withStyles(styles)(connect(putReduxStateOnProps)(Support));

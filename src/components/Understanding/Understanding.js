@@ -1,7 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
+//comments on Feeling.js apply to everything in this component as well
 
+import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import { connect } from 'react-redux';
+
+const styles = theme => ({ 
+    button: {
+        margin: theme.spacing.unit,
+    },
+});
 
 class Understanding extends Component {
 
@@ -29,7 +37,6 @@ class Understanding extends Component {
 
     handleChangeFor = (event, propertyName) => {
         console.log('in handleChangeFor', event.target.value);
-        //put if/else in here with .alert?
 
         this.setState({
             ...this.props.feedback,
@@ -40,10 +47,12 @@ class Understanding extends Component {
 
 
     render() {
+        const classes = this.props.classes
         return (
             <>
-                <h5>How well are you understanding the content?</h5>
-                <p>With 1 being 'Don't understand a thing' and 5 being 'I'm a genius now', how well do you understand the content?</p>
+                <h3>How well are you understanding the material?</h3>
+                <p>With '1' being "I don't get a freaking thing" and '5' being "I am clearly a genius now," 
+                    how well do you understand the content?</p>
                 <form onSubmit={this.handleSubmit}>
                     <div className="dropdown">
                         <select type="select" onChange={event => this.handleChangeFor(event, 'understanding')}>
@@ -55,10 +64,9 @@ class Understanding extends Component {
                             <option value="5">5</option>
                         </select>
                     </div>
-                    <button type="submit">Next</button>
+                    <Button type="submit" variant="contained" color="secondary" className={classes.button}>Next</Button>
                 </form>
                 {JSON.stringify(this.props.feedback)}
-                <p>Here's state rn:</p> {JSON.stringify(this.state)}
             </>
         );
     }
@@ -68,4 +76,4 @@ const putReduxStateOnProps = (reduxStore) => ({
     feedback: reduxStore.feedbackReducer,
 })
 
-export default withStyles()(connect(putReduxStateOnProps)(Understanding));
+export default withStyles(styles)(connect(putReduxStateOnProps)(Understanding));

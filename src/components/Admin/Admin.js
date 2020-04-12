@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
-
+import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -18,7 +18,10 @@ const styles = theme => ({
     },
     table: {
         minWidth: 700
-    }
+    },
+    button: {
+        margin: theme.spacing.unit,
+    },
 })
 
 class Admin extends Component {
@@ -50,6 +53,7 @@ class Admin extends Component {
     }
 
     render() {
+        const classes = this.props.classes
         return (
             <>
             <div>
@@ -75,7 +79,7 @@ class Admin extends Component {
                                 <TableCell align="center">{feedback.support}</TableCell>
                                 <TableCell align="center">{feedback.comments}</TableCell>
                                 <TableCell align="center">
-                                    <button onClick={() => this.handleDelete(feedback.id)}>Delete</button>
+                                    <Button variant="contained" color="secondary" className={classes.button} onClick={() => this.handleDelete(feedback.id)}>Delete</Button>
                                 </TableCell>
                             </TableRow>
                         ))}

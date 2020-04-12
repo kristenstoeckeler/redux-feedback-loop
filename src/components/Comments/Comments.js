@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const styles = theme => ({
+    button: {
+        margin: theme.spacing.unit,
+    },
+});
 
 
 class Comments extends Component {
+
+    state = {
+        feeling: 0,
+        understanding: 0,
+        support: 0,
+        comments: '',
+    }
+
     handleSubmit = (event) => {
         console.log('In handleSubmit');
         event.preventDefault();
@@ -23,14 +38,15 @@ class Comments extends Component {
     }
 
     render() {
+        const classes = this.props.classes
         return (
             <>
-                <h5>Are there any comments you'd like to leave?</h5>
+                <h3>For god's sake, say something.</h3>
                 <form onSubmit={this.handleSubmit}>
                     <label>Comments
                     <textarea onChange={event => this.handleChangeFor(event, 'comments')}/>
                     </label>
-                    <button type="submit">Next</button>
+                    <Button type="submit" variant="contained" color="secondary" className={classes.button}>Next</Button>
                 </form>
 
                 {JSON.stringify(this.props.feedback)}
@@ -43,4 +59,4 @@ const putReduxStateOnProps = (reduxStore) => ({
     feedback: reduxStore.feedbackReducer,
 })
 
-export default withStyles()(connect(putReduxStateOnProps)(Comments));
+export default withStyles(styles)(connect(putReduxStateOnProps)(Comments));
